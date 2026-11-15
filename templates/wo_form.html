@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">New Work Order</h2>
+    <form method="post" class="card p-6 space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Title</label>
+            <input type="text" name="title" required class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea name="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Asset</label>
+                <select name="asset_id" required class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2">
+                    {% for asset in assets %}
+                    <option value="{{ asset.id }}">{{ asset.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Priority</label>
+                <select name="priority" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2">
+                    <option>Critical</option>
+                    <option selected>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                </select>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Type</label>
+                <select name="type" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2">
+                    <option>Corrective</option>
+                    <option>Preventive</option>
+                    <option>Inspection</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Assigned To</label>
+                <input type="text" name="assigned_to" placeholder="Tech name" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2">
+            </div>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Due Date</label>
+            <input type="date" name="due_date" class="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2">
+        </div>
+        <div class="flex gap-3 pt-4">
+            <button type="submit" class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg font-medium">Create Work Order</button>
+            <a href="/workorders" class="px-6 py-2 border border-gray-300 rounded-lg">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
